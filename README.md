@@ -10,15 +10,15 @@ las tecnologías utilizadas son el framework Angular version 12, Typescript (sup
 Antes de ejecutar el frontend como local necesitaremos instalar nodejs (https://nodejs.org/en/), angularCLI (https://angular.io/cli) y git (https://git-scm.com/)
 
 # Botones
-lapiz 
+# lapiz 
 el evento click despliega una ventana modal, con un formulario y sus campos, permitiendo la edicion y actualizacion de cada caracteristica de la tarea, excepto la propiedad 'activo'.
-cesto
+# cesto
 el evento click permite la eliminacion logica de la tarea.
-run
+# run
 el evento click da inicio a la tarea, provocando un cambio de estado, a IN-PROGRESS.
-done
+# done
 el evento click provoca un cambio de estado en la tarea a DONE.
-tarea +
+# tarea +
 el evento click despliega una ventana modal, con un formulario y sus campos, permitiendo la carga de informacion correspondiente a una nueva tarea para luego ser dada de alta en la base de datos.
-ver todos
+# ver todos
 limita o despliega todo el listado de tareas expuestas en el estado TO-DO.
