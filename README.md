@@ -4,7 +4,10 @@ Contiene las funcionalidades básicas de un CRUD (Create, Read, Update, Delete) 
 Permitirá al usuario calendarizar, lanzar publicaciones y eventos sobre sus productos.
 
 # Tecnologias
-las tecnologías utilizadas son el framework Angular version 12, Typescript (superset de javascript) como lenguaje de programacion en sus componentes, Bootstrap 5 para los estilos CSS, Font-Awesome para los iconos vectoriales y angular-cli-ghpages para el despliegue. Todas las dependencias del proyecto se registan en el package.json para la instalacion automatica de las mismas con el comando npm i. 
+las tecnologías utilizadas son el framework Angular version 12, Typescript (superset de javascript) como lenguaje de programacion en sus componentes; Bootstrap 5 para los estilos CSS, Font-Awesome para los iconos vectoriales y angular-cli-ghpages para el despliegue. Todas las dependencias del proyecto se registan en el package.json para la instalacion automatica de las mismas con el comando npm i. 
+
+# previa
+antes de ejecutar el frontend como local necesitaremos instalar nodejs (https://nodejs.org/en/), angularCLI (https://angular.io/cli) y git (https://git-scm.com/)
 
 # Botones y Enlaces
 # lapiz 
