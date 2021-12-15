@@ -1,27 +1,18 @@
-# Challenge
+El siguiente es una breve descripción del proyecto Front-end solicitado para la prueba técnica challenge version: 0.0.1.
+El mismo respeta un diseño minimalista (formas y colores más básicos) con el propósito es hacer que sobresalga el contenido.
+La experiencia de usuario es muy intuitiva. Contiene las funcionalidades básicas de un CRUD (Create, Read, Update, Delete) además de la gestión de los estados de una tarea.
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 12.2.10.
+- Tecnologias
+las tecnologías utilizadas son el framework Angular version 12, Typescript como lenguaje de programacion principal, Bootstrap 5 como framework para los estilos CSS y Font-Awesome para los iconos vectoriales. Todas las dependencias del proyecto se registan en el package.json para la instalacion automatica de las mismas con el comando npm i. 
 
-## Development server
+- Estructura de ficheros 
+ 
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 
-## Code scaffolding
-
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
-
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+- Botones y Enlaces
+lapiz: el evento click despliega una ventana modal, con un formulario y sus campos, permitiendo la edicion y actualizacion de cada caracteristica de la tarea, excepto la propiedad 'activo'.
+cesto: el evento click permite la eliminacion logica de la tarea.
+run: el evento click da inicio a la tarea, provocando un cambio de estado, a IN-PROGRESS.
+done: el evento click provoca un cambio de estado en la tarea a DONE.
+tarea +: el evento click despliega una ventana modal, con un formulario y sus campos, permitiendo la carga de informacion correspondiente a una nueva tarea para luego ser dada de alta en la base de datos.
+ver todos: limita o despliega todo el listado de tareas expuestas en el estado TO-DO.

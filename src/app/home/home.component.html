@@ -1,0 +1,160 @@
+<div class="container">
+  <div class="row">
+    <nav class="navbar m-0 py-3">
+      <h6 class="text-center text-uppercase text-white">
+        <fa-icon [icon]="calendario" class="px-2"></fa-icon>{{hoy | date: 'dd/MM/yyyy'}}
+      </h6>
+      <div class="text-end">
+        <button (click)="changeCarga()" class="btn btn-danger text-dark" data-bs-toggle="modal" data-bs-target="#staticBackdrop" title="Añadir nueva tarea">
+          tarea <fa-icon [icon]="agregar"></fa-icon>
+        </button>
+      </div>
+    </nav>
+
+    <div class="col-md-4 ">
+
+      <h5 class="mb-3 py-2 text-dark text-center bg-warning ">TO-DO</h5>
+      <div class="card my-2" *ngFor="let tarea of results" >
+        <div class="d-flex align-items-center justify-content-between px-3 pt-1" style="padding-right: 5px !important;">
+          <h6 class="text-capitalize">{{ tarea.producto }}</h6>
+          <div class="d-flex align-items-center justify-content-end">
+            <button title="Editar" (click)="changeEditar(tarea.id)" type="button" class="btn btn-outline-light btn-sm text-primary border-0" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+              <fa-icon [icon]="lapiz"></fa-icon>
+            </button>
+            <button title="Borrar" (click)="deleteTask(tarea)" type="button" class="btn btn-outline-light btn-sm text-danger border-0">
+              <fa-icon [icon]="borrar"></fa-icon>
+            </button>
+          </div>
+        </div>
+        <div class="card-body pt-0 pb-1">
+          <p class="text-capitalize">Id: {{ tarea.id }}</p>
+          <p class="text-capitalize">{{ tarea.tipo }}</p>
+          <p>{{ tarea.fecha | date: 'dd/MM/yyyy'}}</p>
+          <div class="text-end">
+            <button class="btn btn-success btn-sm" (click)="toProgress(tarea)" title="Iniciar tarea">run</button>
+          </div>
+        </div>
+      </div>
+      <div class="text-end">
+        <button class="btn btn-outline-dark text-white" (click)="changePagination()">ver todos ({{ sizeArreglo }})</button>
+      </div>
+    </div>
+
+    <div class="col-md-4 ">
+
+      <h5 class="mb-3 py-2 text-dark text-center bg-info ">IN PROGRESS</h5>
+      <div class="card my-2" *ngFor="let tarea of procesando">
+        <div class="card-body py-1">
+          <h6 class="text-capitalize">{{ tarea.producto }}</h6>
+          <p class="text-capitalize">Id: {{ tarea.id }}</p>
+          <p class="text-capitalize">{{ tarea.tipo }}</p>
+          <p>{{ tarea.fecha | date: 'dd/MM/yyyy'}}</p>
+          <div class="text-end">
+            <button class="btn btn-success btn-sm" (click)="toDone(tarea)" title="Concluir tarea">done</button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="col-md-4 ">
+
+      <h5 class="mb-3 py-2 text-dark text-center bg-success ">DONE</h5>
+      <div class="card my-2" *ngFor="let tarea of listo">
+        <div class="card-body py-1">
+          <h6 class="text-capitalize">{{ tarea.producto }}</h6>
+          <p class="text-capitalize">Id: {{ tarea.id }}</p>
+          <p class="text-capitalize">{{ tarea.tipo }}</p>
+          <p>{{ tarea.fecha | date: 'dd/MM/yyyy'}}</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-4"></div>
+    <div class="col-md-4">
+
+      <h5 class="mb-3 mt-2 py-2 text-dark text-center bg-danger ">DELETE</h5>
+      <div class="card my-2" *ngFor="let tarea of eliminados">
+        <div class="card-body py-1">
+          <h6 class="text-capitalize">{{ tarea.producto }}</h6>
+          <p class="text-capitalize">Id: {{ tarea.id }}</p>
+          <p class="text-capitalize">{{ tarea.tipo }}</p>
+          <p>{{ tarea.fecha | date: 'dd/MM/yyyy'}}</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+<br>
+
+
+<!-- Modal tareas -->
+
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+  aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header bg-dark px-4 border-0">
+        <h6 class="modal-title text-white text-uppercase" id="staticBackdropLabel" *ngIf="editar">editar tarea</h6>
+        <h6 class="modal-title text-white text-uppercase" id="staticBackdropLabel" *ngIf="carga">nueva tarea</h6>
+        <button (click)="limpiarForm()" type="button" class="btn btn-danger text-dark btn-sm text-capitalize" data-bs-dismiss="modal">
+          cerrar <fa-icon [icon]="cerrar"></fa-icon>
+        </button>
+      </div>
+      <div class="modal-body bg-dark text-white px-4">
+        <!-- Form -->
+        <form (ngSubmit)="enviar()" autocomplete="off" [formGroup]="miFormulario">
+          <div class="mb-2">
+            <label for="producto" class="form-label">Producto</label>
+            <input type="text" class="form-control" id="producto" formControlName="producto">
+            <span class="form-text text-danger" *ngIf="fieldFormValid('producto')">
+              *este campo es obligatorio
+            </span>
+          </div>
+          <div class="mb-2">
+            <label for="titulo" class="form-label">Titulo de tarea</label>
+            <input type="text" class="form-control" id="titulo" formControlName="titulo">
+          </div>
+          <div class="row mb-2">
+            <div class="col-sm-6">
+              <label for="seleccionar" class="form-label">Tipo de tarea</label>
+              <select *ngIf="carga" id="seleccionar" class="form-select" formControlName="tipo">
+                <option>aumento de precio</option>
+                <option>descuento de precio</option>
+                <option>cambio de título</option>
+                <option>pausado de producto</option>
+                <option>baja de producto</option>
+              </select>
+              <input *ngIf="editar" id="seleccionar" class="form-control" formControlName="tipo">
+              <span class="form-text text-danger" *ngIf="fieldFormValid('tipo')">
+                *este campo es obligatorio
+              </span>
+            </div>
+            <div class="col-sm-6">              
+              <label for="fecha" class="form-label text-capitalize">fecha</label>
+              <input id="fecha" class="form-control" type="date" formControlName="fecha">
+              <span class="form-text text-danger" *ngIf="fieldFormValid('fecha')">
+                *este campo es obligatorio
+              </span>
+            </div>
+          </div>         
+          <div class="text-center my-4">
+            <button type="submit" *ngIf="carga" class="btn btn-success text-dark text-center text-capitalize" [disabled]="miFormulario.invalid">
+              enviar <fa-icon [icon]="avioncito"></fa-icon>
+            </button>
+            <button type="submit" *ngIf="editar" class="btn btn-success text-dark text-center text-capitalize" [disabled]="miFormulario.invalid">
+              actualizar <fa-icon [icon]="avioncito"></fa-icon>
+            </button>
+          </div>
+        </form>
+        <!-- end -->
+      </div>
+    </div>
+  </div>
+</div>
+
+
